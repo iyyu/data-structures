@@ -22,13 +22,14 @@ var LinkedList = function() {
     return result;
   };
 
-  list.contains = function(target, node = list.head, found = false) {
-    debugger;
+  list.contains = function(target, node = list.head) {
+    let found = false;
     if (node.value === target) {
       found = true;
     } else {
       if (node.next !== null && found === false) {
-        found = list.contains(target, node.next, found);
+        let result = list.contains(target, node.next);
+        found = result;
       }
     }
     return found;

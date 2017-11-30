@@ -15,18 +15,19 @@ treeMethods.addChild = function(value) {
   this.children.push(newTree);
 };
 
-treeMethods.contains = function(target, tree, found = false) {
-  if (tree.value === target) {
+treeMethods.contains = function(target, found = false) {
+  if (this.value === target) {
     found = true;
-  }
-  else {
-    if (found !== true && tree.children.length > 0) {
-      // for loop to run through each child node in children array
-      found = tree.contains(target, tree.children)
+  } else {
+    if (found !== true && this.children.length > 0) {
+      for (let node = 0; node < this.children.length; node++) {
+        let result = this.children[node].contains(target, found);
+        found = result;
+      }
     }
   }
+  return found;
 };
-
 
 /*
  * Complexity: What is the time complexity of the above functions?
