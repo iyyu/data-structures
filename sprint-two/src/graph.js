@@ -23,6 +23,7 @@ Graph.prototype.contains = function(node) {
 Graph.prototype.removeNode = function(node) {
   let index = this.nodes.indexOf(node);
   this.nodes.splice(index, 1);
+  // remove Edge
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -65,7 +66,6 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
       toIndex = this.nodes.indexOf(this.nodes[k]);
     } 
   }
-  
   this.nodes[fromIndex].edges.push(this.nodes[toIndex].value);
   this.nodes[toIndex].edges.push(this.nodes[fromIndex].value);
   
@@ -73,15 +73,24 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
   // console.log('this is the fromIndex edges array', this.nodes[fromIndex].edges);
 };
 
-
-
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
+  this.nodes.reduce(function(all, item, index) {
+    if (item.value === fromNode) {
+      var edgeIndex = item.edges.indexOf(toNode);
+      item.edges.splice(edgeIndex, 1);
+    }
+  });
   
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  debugger;
+  this.nodes.forEach(function(item) {
+    console.log(item);
+    cb(item.value);
+  });
 };
 
 /*
