@@ -2,18 +2,28 @@
 
 // Instantiate a new graph
 var Graph = function() {
+  // shared properties
+  // NOTE: Graph is instantiating as an object with an empty array of nodes
+  // with an empty array for edges
+  this.nodes = [];
 };
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  this.nodes.push({value: node, edges: []});
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
+  return (this.nodes.filter(function(elem) {
+    return elem.value === node;
+  })).length > 0;
 };
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+  let index = this.nodes.indexOf(node);
+  this.nodes.splice(index, 1);
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -37,3 +47,6 @@ Graph.prototype.forEachNode = function(cb) {
  */
 
 
+// let someGraph = new Graph(0);
+// someGraph.addNode(1);
+// someGraph.addEdge(0, 1);
