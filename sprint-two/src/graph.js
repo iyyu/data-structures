@@ -4,7 +4,6 @@
 var Graph = function() {
   // shared properties
   // NOTE: Graph is instantiating as an object with an empty array of nodes
-  // with an empty array for edges
   this.nodes = [];
 };
 
@@ -32,6 +31,27 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
+  debugger;
+  // let fromIndex = this.nodes.indexOf(fromNode);
+  
+  let fromIndex = this.nodes.reduce(function(all, item, index) {
+    if (item.value === fromNode) {
+      all = index;
+    }
+    return all;
+  });
+  
+  let toIndex = this.nodes.reduce(function(all, item, index) {
+    if (item.value === toNode) {
+      all = index;
+    }
+    return all;
+  });
+  
+  // let toIndex = this.nodes.indexOf(toNode);
+  
+  this.nodes[fromIndex].edges.push(this.nodes[toIndex]);
+  this.nodes[toIndex].edges.push(this.nodes[fromIndex]);
 };
 
 // Remove an edge between any two specified (by value) nodes.
