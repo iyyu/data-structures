@@ -82,7 +82,17 @@ let searchTreeMethods = {
   },
   
   depthFirstLog: function(func) {
-    return 'placeholder';
+    
+    func(this.value);
+
+    if (this.left !== null) {
+      this.left.depthFirstLog(func);
+    } 
+
+    if (this.right !== null) {
+      this.right.depthFirstLog(func);
+    } 
+
   }
   
 };
