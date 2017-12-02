@@ -7,9 +7,7 @@ var Set = function() {
 var setPrototype = {};
 
 setPrototype.add = function(item) {
-  // if the storage does not contain item
-    // push item into the 
-  if (this._storage.contains(item === false)) {
+  if (this.contains(item) === false) {
     this._storage.push(item);
   }
 };
@@ -32,9 +30,16 @@ setPrototype.remove = function(item) {
     // remove index from set (using splice if in JS)
   
   let index = this._storage.indexOf(item);
+  if (index !== -1) {
+    this._storage.splice(index, 1);
+  }
+  
   
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ add: O(n)
+ contains: O(n)
+ remove: O(n)
  */
