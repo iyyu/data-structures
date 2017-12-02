@@ -10,7 +10,6 @@
 var BinarySearchTree = function(value) {
   let someSearchTree = Object.create(searchTreeMethods);
   
-  // someSearchTree.depth = depthFirstLog(func);
   someSearchTree.value = value;
   someSearchTree.left = null;
   someSearchTree.right = null;
@@ -19,8 +18,7 @@ var BinarySearchTree = function(value) {
 };
 
 let searchTreeMethods = {
-  
-  // population: this.population || 1,
+
   
   insert: function(value) {
     let newNode = BinarySearchTree(value);
@@ -61,24 +59,20 @@ let searchTreeMethods = {
   },
   
   containsSearchHelper: function(value, found) {  
-     
+
     if (found !== true) {
       if (this.value === value) {
         found = true;
+        return found;
       }
-      if (this.left !== null && found !== true) {
+      if (this.left !== null && found !== true && value < this.left.value) {
         found = this.left.containsSearchHelper(value, found);
       } 
-    }
-    if (found !== true) {
-      if (this.value === value) {
-        found = true;
-      }
-      if (this.right !== null && found !== true) {
+      if (this.right !== null && found !== true && value >= this.right.value) {
         found = this.right.containsSearchHelper(value, found);
       } 
+      return found;
     }
-    return found;
   },
   
   depthFirstLog: function(func) {
