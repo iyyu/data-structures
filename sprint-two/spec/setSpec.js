@@ -23,5 +23,12 @@ describe('set', function() {
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
+  
+  it('should have unique values', function() {
+    set.add('David Harlow');
+    set.add('David Harlow');
+    set.add('Iris Yu');
+    expect(set._storage[1]).to.equal('Iris Yu');
+  });
 
 });
