@@ -3,6 +3,8 @@ var LinkedList = function() {
   list.head = null;
   list.tail = null; 
 
+  // change addToTail to addAfter
+  // add param called insertedValue
   list.addToTail = function(value) {
     let node = Node(value);
     if (list.tail !== null) {
@@ -13,6 +15,10 @@ var LinkedList = function() {
       list.head = node;
     }
   };
+
+  // build lookup function
+
+  // make addBefore method
 
   list.removeHead = function() {
     let result = list.head.value;
@@ -34,6 +40,20 @@ var LinkedList = function() {
     }
     return found;
   };
+
+  list.lookup = function(target, node = list.head, holder) {
+    let found = false;
+    if (node.value === target) {
+      found = true;
+    } else {
+      if (node.next !== null && found === false) {
+        let result = [list.lookup(target, node.next), node];
+        found = result;
+      }
+    }
+    return result[[1]];
+  };
+
   return list;
 };
 
@@ -42,6 +62,7 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
+  node.previous = null;
 
   return node;
 };

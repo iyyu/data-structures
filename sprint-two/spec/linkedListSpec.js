@@ -51,5 +51,49 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
-  // add more tests here to test the functionality of linkedList
+  xit('should create a new node to be inserted', function() {
+    linkedList.addToTail(2);
+    linkedList.addToTail(7);
+    linkedList.addAfter(linkedList.lookup(2, linkedList.head), 4);
+    expect(linkedList.contains(4).to.equal(true));
+  });
+
+  xit('should make new node\'s previous property point to original reference node', function() {
+    linkedList.addToTail(2);
+    linkedList.addToTail(7);
+    linkedList.addAfter(linkedList.lookup(2, linkedList.head), 4);
+    expect(linkedList.lookup(4, linkedList.head).previous).to.equal(linkedList.lookup(2, linkedList.head));
+  });
+
+  xit('should make new node\'s next property point to the original reference node\'s old next property', function() {
+    linkedList.addToTail(2);
+    linkedList.addToTail(7);
+    linkedList.addAfter(linkedList.lookup(2, linkedList.head), 4);
+    expect(linkedList.lookup(4, linkedList.head).next).to.equal(linkedList.lookup(7));
+  });
+
+  xit('should change original reference node\'s next property to point to new node', function() {
+    linkedList.addToTail(2);
+    linkedList.addToTail(7);
+    linkedList.addAfter(linkedList.lookup(2, linkedList.head), 4);
+    expect(linkedList.lookup(2, linkedList.head).next).to.equal(linkedList.lookup(4, linkedList.head));
+  });
+
+  xit('should change original reference node\'s old next\'s previous property to point to new node', function() {
+    linkedList.addToTail(2);
+    linkedList.addToTail(7);
+    linkedList.addAfter(linkedList.lookup(2, linkedList.head), 4);
+    expect(linkedList.lookup(7, linkedList.head).previous).to.equal(linkedList.lookup(4, linkedList.head));
+  });
+
+  xit('should find a node that has been added', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.lookup(4, linkedList.head)).to.be.a('object');
+    expect(linkedList.lookup(4, linkedList.head)).to.have.property('next');
+    expect(linkedList.lookup(4, linkedList.head)).to.have.property('previous');
+    expect(linkedList.lookup(5, linkedList.head)).to.not.be.a('object');
+    expect(linkedList.lookup(5, linkedList.head)).to.not.have.property('next');
+    expect(linkedList.lookup(5, linkedList.head)).to.not.have.property('previous');
+  });
+
 });
