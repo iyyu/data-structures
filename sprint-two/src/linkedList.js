@@ -41,17 +41,16 @@ var LinkedList = function() {
     return found;
   };
 
-  list.lookup = function(target, node = list.head, holder) {
-    let found = false;
+  list.lookup = function(target, node = list.head) {
     if (node.value === target) {
-      found = true;
+      return node;
     } else {
-      if (node.next !== null && found === false) {
-        let result = [list.lookup(target, node.next), node];
-        found = result;
+      if (node.next !== null) {
+        list.lookup(target, node.next);
+      } else {
+        return undefined;
       }
     }
-    return result[[1]];
   };
 
   return list;

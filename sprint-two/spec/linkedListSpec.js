@@ -86,14 +86,12 @@ describe('linkedList', function() {
     expect(linkedList.lookup(7, linkedList.head).previous).to.equal(linkedList.lookup(4, linkedList.head));
   });
 
-  xit('should find a node that has been added', function() {
+  it('should find a node that has been added', function() {
     linkedList.addToTail(4);
     expect(linkedList.lookup(4, linkedList.head)).to.be.a('object');
     expect(linkedList.lookup(4, linkedList.head)).to.have.property('next');
     expect(linkedList.lookup(4, linkedList.head)).to.have.property('previous');
-    expect(linkedList.lookup(5, linkedList.head)).to.not.be.a('object');
-    expect(linkedList.lookup(5, linkedList.head)).to.not.have.property('next');
-    expect(linkedList.lookup(5, linkedList.head)).to.not.have.property('previous');
+    expect(linkedList.lookup(5, linkedList.head)).to.equal(undefined);
   });
 
 });
