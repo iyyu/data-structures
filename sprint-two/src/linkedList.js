@@ -56,6 +56,7 @@ var LinkedList = function() {
   };
 
   list.lookup = function(target, node = list.head) {
+    let result;
     if (node.value === target) {
       result = node;
     } else {
