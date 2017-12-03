@@ -6,17 +6,31 @@ var LinkedList = function() {
   // change addToTail to addAfter
   // add param called insertedValue
   list.addToTail = function(value) {
-    let node = Node(value);
+    let newNode = Node(value);
     if (list.tail !== null) {
-      list.tail.next = node;
+      list.tail.next = newNode;
+      newNode.previous = list.tail;
     }
-    list.tail = node;
+    list.tail = newNode;
     if (list.head === null) {
-      list.head = node;
+      list.head = newNode;
     }
   };
 
-  // build lookup function
+  list.addAfter = function(nodeRef, value) {
+    let newNode = Node(value);
+    let oldNext = nodeRef.next;
+
+    newNode.previous = nodeRef;
+    newNode.next = oldNext;
+    nodeRef.next = newNode;
+    oldNext.previous = newNode;
+
+
+  };
+
+  // let wantToAdd = linkedList.lookup(4);
+  // linkedList.addAfter(5, wantToAdd);
 
   // make addBefore method
 
@@ -43,14 +57,16 @@ var LinkedList = function() {
 
   list.lookup = function(target, node = list.head) {
     if (node.value === target) {
-      return node;
+      result = node;
     } else {
       if (node.next !== null) {
-        list.lookup(target, node.next);
+        result = list.lookup(target, node.next);
+       
       } else {
         return undefined;
       }
     }
+    return result;
   };
 
   return list;
